@@ -95,7 +95,7 @@ function command_query($sql){
 
 function check_license(){
 	if(isset($_POST["client_key"]) == TRUE){
-		$client_key = $_POST["client_key"];
+		$client_key = mysql_real_escape_string($_POST["client_key"]);
 		$sql_select = "
 				SELECT license_date FROM  m_active
 				WHERE server_key = MD5('$client_key') 
@@ -117,7 +117,7 @@ function active_license(){
 	if(
 		isset($_POST["client_key"]) == TRUE
 	){
-		$client_key = $_POST["client_key"];
+		$client_key = mysql_real_escape_string($_POST["client_key"]);
 		
 		$sql_insert = "
 			UPDATE m_active
@@ -142,8 +142,8 @@ function request_license(){
 		isset($_POST["client_key"]) == TRUE &&
 		isset($_POST["client_info"]) == TRUE
 	){
-		$client_key = $_POST["client_key"];
-		$client_info = $_POST["client_info"];
+		$client_key = mysql_real_escape_string($_POST["client_key"]);
+		$client_info = mysql_real_escape_string($_POST["client_info"]);
 		
 		$sql_insert = "
 			INSERT INTO m_active 
@@ -185,12 +185,12 @@ function insert_account_autoreg()
 		isset($_POST["access_token"]) == TRUE && 
 		isset($_POST["reg_status"]) == TRUE
 	){
-		$m_active_id = $_POST["m_active_id"];
-		$username = $_POST["username"];
-		$password = $_POST["password"];
-		$cookie = $_POST["cookie"];
-		$access_token = $_POST["access_token"];
-		$reg_status = $_POST["reg_status"];
+		$m_active_id = mysql_real_escape_string($_POST["m_active_id"]);
+		$username = mysql_real_escape_string($_POST["username"]);
+		$password = mysql_real_escape_string($_POST["password"]);
+		$cookie = mysql_real_escape_string($_POST["cookie"]);
+		$access_token = mysql_real_escape_string($_POST["access_token"]);
+		$reg_status = mysql_real_escape_string($_POST["reg_status"]);
 		
 		$sql_insert = "
 			INSERT INTO m_result 
